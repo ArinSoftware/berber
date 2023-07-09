@@ -8,4 +8,10 @@ router
   .get(servicesControllers.getAllServices)
   .post(servicesControllers.createService);
 
+router
+  .route('/:serviceId')
+  .get(servicesControllers.getServiceById)
+  .put(servicesControllers.updateService)
+  .delete(servicesControllers.deleteService);
+
 export default router;
