@@ -1,6 +1,6 @@
 import express from 'express';
 import connectDB from './config/db.js';
-import usersRoute from './routes/usersRoute.js';
+import servicesRoutes from './routes/servicesRoutes.js';
 
 const PORT = 3000;
 
@@ -11,7 +11,11 @@ const startServer = async () => {
 
     // Create the Express server
     const server = express();
-    server.use('/api/v1/users', usersRoute);
+
+    // Use built-in middleware to parse JSON-encoded request bodies
+    server.use(express.json());
+
+    server.use('/api/v1/services', servicesRoutes);
 
     // Start the server
     server.listen(PORT, () => {
