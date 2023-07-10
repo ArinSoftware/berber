@@ -1,4 +1,3 @@
-import { users } from '../data/users.js';
 import Service from '../models/Service.js';
 import * as helpers from '../helpers/index.js';
 
@@ -118,8 +117,17 @@ const deleteService = async (req, res) => {
   }
 };
 
-const getAllServices = (req, res) => {
-  res.json(users);
+const getAllServices = async (req, res) => {
+  try {
+    const services = await Service.find();
+    return res.json({
+      success: true,
+      message: 'Services received successfully',
+      services,
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 export {
