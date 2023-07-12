@@ -1,5 +1,6 @@
 <script setup>
-
+import { useServicesStore } from "../../stores/services.js"
+const services = useServicesStore();
 </script>
 
 <template>
