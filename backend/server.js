@@ -1,5 +1,6 @@
 import express from 'express';
 import connectDB from './config/db.js';
+import cors from 'cors';
 import servicesRoutes from './routes/servicesRoutes.js';
 
 const PORT = 3000;
@@ -11,6 +12,20 @@ const startServer = async () => {
 
     // Create the Express server
     const server = express();
+
+    // Configure CORS
+    server.use(
+      cors({
+        origin: function (origin, callback) {
+          if (['http://localhost:5173', undefined].includes(origin)) {
+            // Permit the coection
+            callback(null, true);
+          } else {
+            callback(new Error('CORS Error'));
+          }
+        },
+      })
+    );
 
     // Use built-in middleware to parse JSON-encoded request bodies
     server.use(express.json());
