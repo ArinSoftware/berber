@@ -9,7 +9,6 @@ export const useServicesStore = defineStore('services', () => {
     try {
       const { data } = await ServicesAPI.all();
       services.value = data;
-      console.log('DATAX', data);
     } catch (error) {
       console.log(error);
     }
