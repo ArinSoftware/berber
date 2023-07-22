@@ -5,7 +5,6 @@ export const useAppointmentsStore = defineStore('appointments', () => {
   const services = ref([]);
 
   function onServiceSelected(service) {
-    console.log('onServiceSelected');
     if (
       services.value.some(
         (selectedService) => selectedService._id === service._id
@@ -27,8 +26,14 @@ export const useAppointmentsStore = defineStore('appointments', () => {
     return (id) => services.value.some((service) => service._id === id);
   });
 
+  const totalAmount = computed(() => {
+    return services.value.reduce((total, service) => total + service.price, 0);
+  });
+
   return {
+    services,
     onServiceSelected,
     isServiceSelected,
+    totalAmount,
   };
 });
